@@ -1,5 +1,6 @@
 const showAllButton = document.querySelector('#show-all')
 const givDiscountButton = document.querySelector('#giv-discount')
+const sumAllProductsButton = document.querySelector('#sum-all-products')
 const list = document.querySelector('#product-list')
 
 
@@ -26,8 +27,6 @@ function showAllProducts(newArrayProducts){
 
 function givTenPercentDiscount(){
     
-    list.innerHTML = ''
-
    const newPrices = menuOptions.map((product) => ({
 
         ...product,
@@ -39,8 +38,26 @@ function givTenPercentDiscount(){
     givDiscountButton.dispatchEvent = true;
 }
 
+function sumAllProducts(){
+    
+    let myLi = ""
+    
+    const sumAllPrices = menuOptions.reduce((accumulator, product) => accumulator + product.price, 0)
+
+    myLi += `
+    
+        <li>
+            <p>The total value of all products is: U$ ${sumAllPrices}</p>
+        </li>
+    `
+    list.innerHTML = myLi
+    
+}
+
+
 showAllButton.addEventListener( 'click', ()=> showAllProducts(menuOptions))
 givDiscountButton.addEventListener('click', givTenPercentDiscount)
+sumAllProductsButton.addEventListener('click', sumAllProducts)
 
 
 
