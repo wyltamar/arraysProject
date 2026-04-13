@@ -1,7 +1,10 @@
 const showAllButton = document.querySelector('#show-all')
 const givDiscountButton = document.querySelector('#giv-discount')
 const sumAllProductsButton = document.querySelector('#sum-all-products')
+const showVeganOnlyButton = document.querySelector('#vegan-only')
 const list = document.querySelector('#product-list')
+
+const totalValueWithDiscount = null
 
 
 function showAllProducts(newArrayProducts){
@@ -47,17 +50,26 @@ function sumAllProducts(){
     myLi += `
     
         <li>
-            <p>The total value of all products is: U$ ${sumAllPrices}</p>
+            <p>The total value of all products with discount is: U$ ${(sumAllPrices * 0.9).toFixed(2)}</p>
         </li>
     `
     list.innerHTML = myLi
     
 }
 
+function showVeganProductsOnly(){
+
+    const veganProducts = menuOptions.filter(product => product.vegan === true)
+
+    showAllProducts(veganProducts)
+}
+
 
 showAllButton.addEventListener( 'click', ()=> showAllProducts(menuOptions))
 givDiscountButton.addEventListener('click', givTenPercentDiscount)
 sumAllProductsButton.addEventListener('click', sumAllProducts)
+showVeganOnlyButton.addEventListener('click', showVeganProductsOnly)
+
 
 
 
